@@ -114,19 +114,41 @@ impl Theme {
         }
     }
 
+    /// Solarized (Light) — warm, low-contrast.
+    pub const fn solarized() -> Self {
+        Theme {
+            desktop_bg: rgb(220, 218, 203),
+            window_bg: rgb(253, 246, 227),
+            title_focus: rgb(238, 232, 213),
+            title_blur: rgb(253, 246, 227),
+            title_fg: rgb(38, 139, 210),
+            border: rgb(147, 161, 161),
+            shadow: Rgba { r: 88, g: 110, b: 117, a: 50 },
+            ctrl_fg: rgb(101, 123, 131),
+            close_fg: rgb(220, 50, 47),
+            menubar_bg: rgb(253, 246, 227),
+            dock_bg: rgb(253, 246, 227),
+            text: rgb(101, 123, 131),
+            dim: rgb(147, 161, 161),
+            accent: rgb(38, 139, 210),
+            active_bg: rgb(213, 228, 239),
+        }
+    }
+
     /// Resolve a theme by name (falls back to `midnight`).
     pub fn named(name: &str) -> Self {
         match name.to_lowercase().as_str() {
             "nord" => Self::nord(),
             "gruvbox" => Self::gruvbox(),
             "dracula" => Self::dracula(),
+            "solarized" => Self::solarized(),
             _ => Self::midnight(),
         }
     }
 }
 
 /// The names of the built-in presets (for the Settings cycler).
-pub const PRESETS: &[&str] = &["midnight", "nord", "gruvbox", "dracula"];
+pub const PRESETS: &[&str] = &["midnight", "nord", "gruvbox", "dracula", "solarized"];
 
 fn slot() -> &'static RwLock<Theme> {
     static THEME: OnceLock<RwLock<Theme>> = OnceLock::new();
